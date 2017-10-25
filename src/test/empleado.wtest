@@ -1,7 +1,29 @@
 import src.empleado.*
+import src.frutas.*
 
-test "testX" {
+describe "comiendo frutas" {
+	const empleado;
 
-	assert.that(true)
+	fixture {
+		empleado = new Empleado(5)
+	}
+	
+	test "un empleado que come una uva sube en 1 su energia" {
+		empleado.comer(uva)
+	
+		assert.equals(6, empleado.stamina())
+	}
+	
+	test "un empleado que come una manzana sube en 5 su energia" {
+		empleado.comer(manzana)
+		
+		assert.equals(10, empleado.stamina())
+	}
 
+	test "un empleado que come una banana sube en 10 su energia" {
+		empleado.comer(banana)
+		
+		assert.equals(15, empleado.stamina())
+	}
+	
 }

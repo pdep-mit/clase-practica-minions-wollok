@@ -1,6 +1,15 @@
 class Empleado {
 	var stamina
-	constructor(_stamina) { stamina = _stamina }
+	var tareasRealizadas
+	constructor(_stamina) {
+		stamina = _stamina
+		tareasRealizadas = []
+	}
+
+	constructor(_stamina, _tareasRealizadas) {
+		stamina = _stamina
+		tareasRealizadas = _tareasRealizadas
+	}
 	
 	method stamina() = stamina
 
@@ -9,6 +18,8 @@ class Empleado {
 	}
 	
 	method aumentarStamina(cantidadDeStamina)
+	
+	method experiencia() = tareasRealizadas.size() + tareasRealizadas.sum({ tarea => tarea.dificultad() })
 }
 
 class Ciclope inherits Empleado {

@@ -1,0 +1,14 @@
+import src.empleado.*
+
+describe "experiencia de un empleado" {
+	test "la experiencia de un empleado que nunca realizo tareas es 0" {
+		const empleadoSinTareas = new Ciclope(10, [])
+		
+		assert.equals(0, empleadoSinTareas.experiencia())
+	}
+	
+//	test "la experiencia de un empleado con tareas es la cantidad de tareas por la suma de la dificultad de las mismas" {
+//		const tarea = ???
+//		const empleado = new Ciclope(10, [tarea])
+//	}
+}

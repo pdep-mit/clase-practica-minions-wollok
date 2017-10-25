@@ -1,0 +1,7 @@
+import src.tareas.*
+
+test "la dificultad de arreglar una maquina es el doble de la complejidad de la maquina a arreglar" {
+	const arreglarUnaMaquina = new ArreglarUnaMaquina(30)
+
+	assert.equals(60, arreglarUnaMaquina.dificultad())
+}

@@ -1,13 +1,14 @@
 import src.empleado.*
 import src.frutas.*
+import empleadosHelper.*
 
 describe "comiendo frutas" {
 	const empleadoCiclope
 	const empleadoBiclope
 
 	fixture {
-		empleadoCiclope = new Ciclope(5)
-		empleadoBiclope = new Biclope(5)
+		empleadoCiclope = empleadosHelper.ciclopeConStamina(5)
+		empleadoBiclope = empleadosHelper.biclopeConStamina(5)
 	}
 	
 	test "un empleado que come una uva sube en 1 su energia" {

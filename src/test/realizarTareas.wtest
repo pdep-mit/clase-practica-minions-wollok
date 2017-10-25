@@ -1,0 +1,23 @@
+import src.empleado.*
+import src.tareas.*
+import empleadosHelper.*
+
+describe "realizar tareas" {
+	test "un empleado falla al intentar arreglar una maquina si no tiene tanta stamina como complejidad tiene la maquina" {
+		const arreglarUnaMaquina = new ArreglarUnaMaquina(10)
+		const empleadoConPocaStamina = empleadosHelper.ciclopeConStamina(3)
+		
+		assert.throwsExceptionWithMessage("Empleado no pudo arreglar la maquina",
+			{ empleadoConPocaStamina.realizarTarea(arreglarUnaMaquina) }
+		)
+	}
+	
+	test "un empleado falla al intentar arreglar una maquina si no tiene las herramientas necesarias" {
+		const arreglarUnaMaquina = new ArreglarUnaMaquina(10, ["martillo", "destornillador"])
+		const empleadoSinHerramientas = empleadosHelper.empleadoConStaminaYHerramientas(10, [])
+		
+		assert.throwsExceptionWithMessage("Empleado no pudo arreglar la maquina",
+			{ empleadoSinHerramientas.realizarTarea(arreglarUnaMaquina) }
+		)
+	}
+}

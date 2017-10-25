@@ -5,7 +5,20 @@ class Empleado {
 	method stamina() = stamina
 
 	method comer(fruta) {
-		stamina += fruta.valor()
+		self.aumentarStamina(fruta.valor())
+	}
+	
+	method aumentarStamina(cantidadDeStamina)
+}
+
+class Ciclope inherits Empleado {
+	override method aumentarStamina(cantidadDeStamina) {
+		stamina += cantidadDeStamina
 	}
 }
 
+class Biclope inherits Empleado {
+	override method aumentarStamina(cantidadDeStamina) {
+		stamina = (stamina + cantidadDeStamina).min(10)
+	}
+}

@@ -19,7 +19,7 @@ class Empleado {
 	
 	method aumentarStamina(cantidadDeStamina)
 	
-	method experiencia() = tareasRealizadas.size() + tareasRealizadas.sum({ tarea => tarea.dificultad() })
+	method experiencia() = tareasRealizadas.size() + tareasRealizadas.sum({ tarea => tarea.dificultadPara(self) })
 }
 
 class Ciclope inherits Empleado {

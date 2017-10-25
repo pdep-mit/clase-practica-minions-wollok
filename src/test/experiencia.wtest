@@ -1,4 +1,5 @@
 import src.empleado.*
+import src.tareas.*
 
 describe "experiencia de un empleado" {
 	test "la experiencia de un empleado que nunca realizo tareas es 0" {
@@ -7,8 +8,13 @@ describe "experiencia de un empleado" {
 		assert.equals(0, empleadoSinTareas.experiencia())
 	}
 	
-//	test "la experiencia de un empleado con tareas es la cantidad de tareas por la suma de la dificultad de las mismas" {
-//		const tarea = ???
-//		const empleado = new Ciclope(10, [tarea])
-//	}
+	test "la experiencia de un empleado con tareas es la cantidad de tareas por la suma de la dificultad de las mismas" {
+		const tarea = new DefenderUnSector(100)
+		const otraTarea = new DefenderUnSector(100) 
+		const empleado = new Ciclope(10, [tarea, otraTarea])
+		
+		assert.equals(202, empleado.experiencia())
+	}
+	
+	
 }

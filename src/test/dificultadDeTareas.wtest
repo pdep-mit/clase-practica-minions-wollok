@@ -1,16 +1,25 @@
 import src.tareas.*
+import src.empleado.*
 
 describe "dificultad de las tareas" {
+	const empleadoCiclope
+	const empleadoBiclope
+
+	fixture {
+		empleadoCiclope = new Ciclope(10)
+		empleadoBiclope = new Biclope(10)
+	}
+
 	test "la dificultad de arreglar una maquina es el doble de la complejidad de la maquina a arreglar" {
 		const arreglarUnaMaquina = new ArreglarUnaMaquina(30)
 	
-		assert.equals(60, arreglarUnaMaquina.dificultad())
+		assert.equals(60, arreglarUnaMaquina.dificultadPara(empleadoCiclope))
 	}
 	
 	test "la dificultad de limpiar un sector es 10" {
 		const limpiarUnSector = new LimpiarUnSector()
 		
-		assert.equals(10, limpiarUnSector.dificultad())
+		assert.equals(10, limpiarUnSector.dificultadPara(empleadoCiclope))
 	}
 	
 	test "cambiar la dificultad de limpiar un sector debería cambiarlo para todas las tareas de defender un sector" {
@@ -19,7 +28,19 @@ describe "dificultad de las tareas" {
 		
 		dificultadDeLimpiarUnSector.cambiarA(20)
 		
-		assert.equals(20, limpiarSectorA.dificultad())
-		assert.equals(20, limpiarSectorB.dificultad())
+		assert.equals(20, limpiarSectorA.dificultadPara(empleadoCiclope))
+		assert.equals(20, limpiarSectorB.dificultadPara(empleadoCiclope))
+	}
+	
+	test "la dificultad de defender un sector para un biclope es el grado de amenaza" {
+		const defenderUnSector = new DefenderUnSector(20)
+		
+		assert.equals(20, defenderUnSector.dificultadPara(empleadoCiclope))
+	}
+	
+	test "la dificultad de defender un sector para un ciclope es el doble del grado de amenaza" {
+		const defenderUnSector = new DefenderUnSector(20)
+		
+		assert.equals(40, defenderUnSector.dificultadPara(empleadoBiclope))
 	}
 }

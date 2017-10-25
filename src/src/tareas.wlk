@@ -4,11 +4,11 @@ class ArreglarUnaMaquina {
 		complejidadDeLaMaquina = _complejidadDeLaMaquina
 	}
 	
-	method dificultad() = complejidadDeLaMaquina * 2
+	method dificultadPara(unEmpleado) = complejidadDeLaMaquina * 2
 }
 
 class LimpiarUnSector {
-	method dificultad() = dificultadDeLimpiarUnSector.dificultad()
+	method dificultadPara(unEmpleado) = dificultadDeLimpiarUnSector.dificultad()
 }
 
 object dificultadDeLimpiarUnSector {
@@ -17,4 +17,11 @@ object dificultadDeLimpiarUnSector {
 		dificultad = unaDificultad
 	}
 	method dificultad() = dificultad
+}
+
+class DefenderUnSector {
+	const gradoDeAmenaza
+	constructor(_gradoDeAmenaza) { gradoDeAmenaza = _gradoDeAmenaza }
+	
+	method dificultadPara(unEmpleado) = unEmpleado.dificultadParaDefender(gradoDeAmenaza)
 }

@@ -26,10 +26,14 @@ class Ciclope inherits Empleado {
 	override method aumentarStamina(cantidadDeStamina) {
 		stamina += cantidadDeStamina
 	}
+	
+	method dificultadParaDefender(gradoDeAmenaza) = gradoDeAmenaza
 }
 
 class Biclope inherits Empleado {
 	override method aumentarStamina(cantidadDeStamina) {
 		stamina = (stamina + cantidadDeStamina).min(10)
 	}
+	
+	method dificultadParaDefender(gradoDeAmenaza) = 2 * gradoDeAmenaza
 }

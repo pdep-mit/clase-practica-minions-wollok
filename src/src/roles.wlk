@@ -11,6 +11,13 @@ class Rol {
 	method staminaPerdidaPorDefender(empleado, tarea) = tarea.staminaQueDemandaDefender(empleado)
 
 	method staminaPerdidaPorLimpiar(empleado, tarea) = tarea.staminaQueDemandaLimpiar(empleado)
+	
+	method puedeRealizar(tarea, empleado) = tarea.puedeSerRealizadaPor(empleado)
+	
+	method realizarTarea(tarea, empleado) {
+		tarea.validarQuePuedaSerRealizadaPor(empleado)
+		empleado.perderStamina(tarea.staminaQuePierde(empleado, self))
+	}
 }
 
 class Mucama inherits Rol{
@@ -50,5 +57,22 @@ class Obrero inherits Rol{
 }
 
 class Capataz inherits Rol{
-	var empleadosACargo = []
+	const subordinados
+	constructor(_subordinados) {
+		subordinados = _subordinados
+	}
+	
+	override method puedeRealizar(tarea, empleado) =
+		self.algunSubordinadoPuedeRealizar(tarea) || super(tarea, empleado)
+		
+	override method realizarTarea(tarea, empleado) {
+		if(self.algunSubordinadoPuedeRealizar(tarea)){
+			subordinados.find({subordinado => subordinado.puedeRealizar(tarea)}).realizarTarea(tarea)			
+		} else {
+			super(tarea, empleado)
+		}
+	}
+	
+	method algunSubordinadoPuedeRealizar(tarea) =
+		subordinados.any({subordinado => subordinado.puedeRealizar(tarea)})
 }

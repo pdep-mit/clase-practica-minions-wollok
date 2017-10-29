@@ -22,6 +22,9 @@ object empleadosHelper {
 		
 	method mucama() =
 		new Ciclope(self.unaStaminaCualquiera(), self.unasTareasCualquiera(), rolesHelper.mucama()) 
+		
+	method obreroConStaminaYHerramientas(unaStamina, unasHerramientas) =
+		new Ciclope(unaStamina, self.unasTareasCualquiera(), rolesHelper.obreroConHerramientas(unasHerramientas))
 
 	method soldadoBiclopeConStaminaYPractica(unaStamina, unaPractica) =
 		new Biclope(unaStamina, self.unasTareasCualquiera(), rolesHelper.soldadoConPractica(unaPractica))
@@ -31,6 +34,12 @@ object empleadosHelper {
 
 	method mucamaConStamina(unaStamina) =
 		new Ciclope(unaStamina, self.unasTareasCualquiera(), rolesHelper.mucama())
+		
+	method capatazConSubordinados(subordinados) =
+		new Ciclope(self.unaStaminaCualquiera(), self.unasTareasCualquiera(), rolesHelper.capatazConSubordinados(subordinados))
+		
+	method capatazConStaminaYSubordinados(unaStamina, subordinados) =
+		new Ciclope(unaStamina, self.unasTareasCualquiera(), rolesHelper.capatazConSubordinados(subordinados))
 
 	method unaStaminaCualquiera() = 5
 	method unasTareasCualquiera() = []

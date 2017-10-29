@@ -34,8 +34,13 @@ class Empleado {
 	method puedeDefender(gradoDeAmenaza) = rol.puedeDefender(gradoDeAmenaza, self)
 
 	method realizarTarea(unaTarea){
-		unaTarea.validarQuePuedaSerRealizadaPor(self)
-		stamina = stamina - unaTarea.staminaQuePierde(self, rol)
+		rol.realizarTarea(unaTarea, self)
+	}
+	
+	method puedeRealizar(tarea) = rol.puedeRealizar(tarea, self)
+	
+	method perderStamina(_stamina) {
+		stamina = (stamina - _stamina).max(0)
 	}
 }
 

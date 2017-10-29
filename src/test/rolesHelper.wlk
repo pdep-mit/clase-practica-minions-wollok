@@ -5,5 +5,9 @@ object rolesHelper {
 	
 	method mucama() = new Mucama()
 	
-	method soldadoConPractica(unaPractica) = new Soldado(unaPractica) 
+	method soldadoConPractica(unaPractica) = new Soldado(unaPractica)
+	
+	method capatazConSubordinados(subordinados) = new Capataz(subordinados) 
+	
+	method obreroConHerramientas(herramientas) = new Obrero(herramientas)
 }

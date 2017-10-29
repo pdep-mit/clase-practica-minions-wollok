@@ -33,13 +33,13 @@ override method staminaPerdidaPorLimpiar(empleado, tarea){
 
 
 class Soldado inherits Rol{
-	var practica 
-	override method fuerzaAdicional(){ 
-		return practica
-	}
-	override method staminaPerdidaPorDefender(empleado, tarea){
-		return 0
-	}
+	const practica
+	constructor(_practica) {
+		practica = _practica
+	} 
+	override method fuerzaAdicional() = practica
+
+	override method staminaPerdidaPorDefender(empleado, tarea) = 0
 }
 
 class Obrero inherits Rol{

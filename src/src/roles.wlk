@@ -1,21 +1,16 @@
 
 class Rol {
-method puedeLimpiar(staminaNecesaria, empleado){
-	return empleado.stamina() > staminaNecesaria
-}
-method tieneHerramienta(herramienta) = false
-method puedeDefender(gradoDeAmenaza, empleado){
-	return empleado.fuerza() >= gradoDeAmenaza	
-}
-method fuerzaAdicional(){
-	return 0
-}
-method staminaPerdidaPorDefender(empleado, tarea){
-	return tarea.staminaQueDemandaDefender(empleado)
-}
-method staminaPerdidaPorLimpiar(empleado, tarea){
-	return tarea.staminaQueDemandaLimpiar(empleado)
-}
+	method puedeLimpiar(staminaNecesaria, empleado) = empleado.stamina() > staminaNecesaria
+
+	method tieneHerramienta(herramienta) = false
+
+	method puedeDefender(gradoDeAmenaza, empleado) = empleado.fuerza() >= gradoDeAmenaza
+
+	method fuerzaAdicional() = 0
+
+	method staminaPerdidaPorDefender(empleado, tarea) = tarea.staminaQueDemandaDefender(empleado)
+
+	method staminaPerdidaPorLimpiar(empleado, tarea) = tarea.staminaQueDemandaLimpiar(empleado)
 }
 
 class Mucama inherits Rol{

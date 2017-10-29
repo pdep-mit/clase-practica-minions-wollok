@@ -29,6 +29,9 @@ object empleadosHelper {
 	method soldadoCiclopeConStaminaYPractica(unaStamina, unaPractica) =
 		new Ciclope(unaStamina, self.unasTareasCualquiera(), rolesHelper.soldadoConPractica(unaPractica))
 
+	method mucamaConStamina(unaStamina) =
+		new Ciclope(unaStamina, self.unasTareasCualquiera(), rolesHelper.mucama())
+
 	method unaStaminaCualquiera() = 5
 	method unasTareasCualquiera() = []
 }

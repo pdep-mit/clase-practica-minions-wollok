@@ -1,8 +1,14 @@
 
 class Tarea {
 	method dificultadPara(empleado)
-	method validarQuePuedaSerRealizadaPor(empleado)
 	method staminaQuePierde(empleado, rol)
+	method puedeSerRealizadaPor(empleado)
+	method errorAlNoPoderSerRealizada()
+	method validarQuePuedaSerRealizadaPor(empleado) {
+		if(!(self.puedeSerRealizadaPor(empleado))) {
+			throw self.errorAlNoPoderSerRealizada()
+		}
+	}
 }
 
 class ArreglarUnaMaquina inherits Tarea{
@@ -19,13 +25,12 @@ class ArreglarUnaMaquina inherits Tarea{
 		herramientasNecesarias = _herramientasNecesarias
 	}
 	override method dificultadPara(empleado) = complejidad * 2
-
-	override method validarQuePuedaSerRealizadaPor(empleado){
-		if(!(empleado.tieneStaminaParaArreglar(complejidad) && empleado.tieneHerramientas(herramientasNecesarias)))
-		{
-			throw new Exception("Empleado no pudo arreglar la maquina")	
-		}
-	}
+	
+	override method puedeSerRealizadaPor(empleado) =
+		empleado.tieneStaminaParaArreglar(complejidad) && empleado.tieneHerramientas(herramientasNecesarias)
+	
+	override method errorAlNoPoderSerRealizada() = new Exception("Empleado no pudo arreglar la maquina")
+	
 	override method staminaQuePierde(empleado, rol) = complejidad
 }
 
@@ -38,12 +43,10 @@ class DefenderSector inherits Tarea{
 	method staminaQueDemandaDefender(empleado) = empleado.stamina() /2
 
 	override method dificultadPara(empleado) = empleado.dificultadDeDefensa(gradoDeAmenaza)
-
-	override method validarQuePuedaSerRealizadaPor(empleado){
-		if (!empleado.puedeDefender(gradoDeAmenaza)){
-			throw new Exception("Empleado no pudo defender el sector")
-		}
-	}
+	
+	override method puedeSerRealizadaPor(empleado) = empleado.puedeDefender(gradoDeAmenaza)
+	
+	override method errorAlNoPoderSerRealizada() = new Exception("Empleado no pudo defender el sector")
 
 	override method staminaQuePierde(empleado, rol) = return rol.staminaPerdidaPorDefender(empleado, self)
 }
@@ -60,11 +63,11 @@ class LimpiarSector inherits Tarea{
 	
 	override method dificultadPara(empleado) = dificultadLimpieza.dificultad()
 	
-	override method validarQuePuedaSerRealizadaPor(empleado){
-		if (!empleado.tieneStaminaParaLimpiar(self.staminaNecesaria())){
-			throw new Exception("Empleado no pudo limpiar sector")
-		}
-	}
+	override method puedeSerRealizadaPor(empleado) =
+		empleado.tieneStaminaParaLimpiar(self.staminaNecesaria())
+	
+	override method errorAlNoPoderSerRealizada() = new Exception("Empleado no pudo limpiar sector")
+
 	override method staminaQuePierde(empleado, rol) = rol.staminaPerdidaPorLimpiar(empleado, self)
 
 	method staminaQueDemandaLimpiar(empleado) = self.staminaNecesaria()

@@ -12,25 +12,25 @@ describe "comiendo frutas" {
 	}
 	
 	test "un empleado que come una uva sube en 1 su energia" {
-		empleadoCiclope.comer(uva)
+		empleadoCiclope.comerFruta(uva)
 	
 		assert.equals(6, empleadoCiclope.stamina())
 	}
 	
 	test "un empleado que come una manzana sube en 5 su energia" {
-		empleadoCiclope.comer(manzana)
+		empleadoCiclope.comerFruta(manzana)
 		
 		assert.equals(10, empleadoCiclope.stamina())
 	}
 
 	test "un empleado que come una banana sube en 10 su energia" {
-		empleadoCiclope.comer(banana)
+		empleadoCiclope.comerFruta(banana)
 		
 		assert.equals(15, empleadoCiclope.stamina())
 	}
 
 	test "un empleado biclope no puede tener mas de 10 de energia" {
-		empleadoBiclope.comer(banana)
+		empleadoBiclope.comerFruta(banana)
 		
 		assert.equals(10, empleadoBiclope.stamina())
 	}

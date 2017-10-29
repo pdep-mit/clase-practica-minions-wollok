@@ -1,7 +1,59 @@
-class Obrero {
-	var cinturon
-	constructor(_herramientas) {
-		cinturon = _herramientas
+
+class Rol {
+method puedeLimpiar(staminaNecesaria, empleado){
+	return empleado.stamina() > staminaNecesaria
+}
+method tieneHerramienta(herramienta) = false
+method puedeDefender(gradoDeAmenaza, empleado){
+	return empleado.fuerza() >= gradoDeAmenaza	
+}
+method fuerzaAdicional(){
+	return 0
+}
+method staminaPerdidaPorDefender(empleado, tarea){
+	return tarea.staminaQueDemandaDefender(empleado)
+}
+method staminaPerdidaPorLimpiar(empleado, tarea){
+	return tarea.staminaQueDemandaLimpiar(empleado)
+}
+}
+
+class Mucama inherits Rol{
+	override method puedeLimpiar(staminaNecesaria, empleado){
+		return true
 	}
-	method tieneHerramienta(herramienta) = cinturon.contains(herramienta)
+	
+	override method puedeDefender(gradoDeAmenaza, empleado){
+		return false
+	}
+override method staminaPerdidaPorLimpiar(empleado, tarea){
+	return 0
+}
+}
+
+
+class Soldado inherits Rol{
+	var practica 
+	override method fuerzaAdicional(){ 
+		return practica
+	}
+	override method staminaPerdidaPorDefender(empleado, tarea){
+		return 0
+	}
+}
+
+class Obrero inherits Rol{
+	const cinturon
+
+	constructor(_cinturon) {
+		cinturon = _cinturon
+	}
+	
+	override method tieneHerramienta(herramienta){
+		return cinturon.contains(herramienta)
+	}
+}
+
+class Capataz inherits Rol{
+	var empleadosACargo = []
 }

@@ -1,50 +1,63 @@
 class Empleado {
 	var stamina
-	var tareasRealizadas
+	var tareas
 	var rol
-	constructor(_stamina, _rol) {
-		stamina = _stamina
-		rol = _rol
-		tareasRealizadas = []
-	}
-
-	constructor(_stamina, _rol, _tareasRealizadas) {
-		stamina = _stamina
-		rol = _rol
-		tareasRealizadas = _tareasRealizadas
-	}
 	
+	constructor(unaStamina, unasTareas, unRol){
+		stamina = unaStamina
+		tareas = unasTareas
+		rol = unRol
+	}
 	method stamina() = stamina
-
-	method comer(fruta) {
-		self.aumentarStamina(fruta.valor())
+	
+	method fuerzaBase() = (stamina + 2) / 2
+	
+	method fuerza() = self.fuerzaBase() + rol.fuerzaAdicional()
+	
+	method comerFruta(unaFruta){
+		self.aumentarStamina(unaFruta.valor())
 	}
 	
-	method aumentarStamina(cantidadDeStamina)
+	method aumentarStamina(cantidad)
 	
-	method experiencia() = tareasRealizadas.size() + tareasRealizadas.sum({ tarea => tarea.dificultadPara(self) })
+	method experiencia() = tareas.size() * tareas.sum({tarea => tarea.dificultadPara(self)})
 	
-	method realizarTarea(unaTarea) {
-		unaTarea.validarQuePuedeSerRealizadaPor(self)
-	}
+	method dificultadDeDefensa(gradoDeAmenaza)
+	
+	method tieneStaminaParaArreglar(complejidad) = stamina > complejidad
+	
+	method tieneHerramientas(herramientasNecesarias) =
+		herramientasNecesarias.all({herramienta => rol.tieneHerramienta(herramienta)})
+	
+	method tieneStaminaParaLimpiar(staminaNecesaria) = rol.puedeLimpiar(staminaNecesaria, self)
+	
+	method puedeDefender(gradoDeAmenaza) = rol.puedeDefender(gradoDeAmenaza, self)
 
-	method tieneStamina(staminaNecesaria) = stamina >= staminaNecesaria
-	
-	method tieneHerramienta(herramienta) = rol.tieneHerramienta(herramienta)
+	method realizarTarea(unaTarea){
+		unaTarea.validarQuePuedaSerRealizadaPor(self)
+		stamina = stamina - unaTarea.staminaQuePierde(self, rol)
+	}
 }
 
 class Ciclope inherits Empleado {
-	override method aumentarStamina(cantidadDeStamina) {
-		stamina += cantidadDeStamina
-	}
+	override method dificultadDeDefensa(gradoDeAmenaza) = gradoDeAmenaza * 2
+
+	override method fuerza() = super() /2
 	
-	method dificultadParaDefender(gradoDeAmenaza) = gradoDeAmenaza
+	override method aumentarStamina(cantidad) {
+		stamina += cantidad
+	}
 }
 
-class Biclope inherits Empleado {
-	override method aumentarStamina(cantidadDeStamina) {
-		stamina = (stamina + cantidadDeStamina).min(10)
-	}
+class Biclope inherits Empleado{
+	override method dificultadDeDefensa(gradoDeAmenaza) = gradoDeAmenaza
 	
-	method dificultadParaDefender(gradoDeAmenaza) = 2 * gradoDeAmenaza
+	override method aumentarStamina(cantidad){
+		stamina = (stamina + cantidad).min(10)
+	}
 }
+
+
+
+
+

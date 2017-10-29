@@ -20,4 +20,22 @@ describe "realizar tareas" {
 			{ empleadoSinHerramientas.realizarTarea(arreglarUnaMaquina) }
 		)
 	}
+	
+	test "un empleado que arregla una maquina pierde tanta stamina como complejidad tenia la maquina" {
+		const empleado = empleadosHelper.biclopeConStamina(10)
+		const arreglarUnaMaquina = new ArreglarUnaMaquina(5)
+		
+		empleado.realizarTarea(arreglarUnaMaquina)
+		
+		assert.equals(5, empleado.stamina())
+	}
+	
+	test "una mucama no puede defender un sector" {
+		const empleadoMucama = empleadosHelper.mucama()
+		const defenderUnSector = new DefenderSector(5)
+		
+		assert.throwsExceptionWithMessage("Empleado no pudo defender el sector",
+			{ empleadoMucama.realizarTarea(defenderUnSector) }
+		)
+	}
 }
